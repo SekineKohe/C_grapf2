@@ -7,7 +7,7 @@
 #include <iomanip>
 using namespace std;
 
-string filename = "waveform F050 rd5.dat";
+string filename = "waveform F060 rd7.dat";
 
 // 定数
 int timer_period = 50;   //< タイマ周期 ミリ秒
@@ -68,7 +68,7 @@ void display_func(){
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-4, 8, -2.5, 2.5, -1.0, 1.0);
+	glOrtho(-4, 6, -5, 5, -1.0, 1.0);
 
 	// 座標軸を描画
         glBegin(GL_LINES);
@@ -109,7 +109,7 @@ int main(int argc, char** argv){
 	// OpenGLを初期化
 	glutInit(&argc, argv);
 
-    int windowWidth = 1200;
+    int windowWidth = 1000;
     int windowHeight = 500;
 
 	// ウィンドウを作成
