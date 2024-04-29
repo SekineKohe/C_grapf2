@@ -3,9 +3,9 @@ CFLAGS  = -Wall -g -c
 INCLUDE = -I../../include/mingw
 LDFLAGS = -L../../lib/mingw/x64
 LIBS    = -lfreeglut -lopengl32
-SOURCES = WU_ell2.cpp
-OBJS    = WU_ell2.o
-PROGRAM = a
+SOURCES = waveform.cpp
+OBJS    = waveform.o
+PROGRAM = b
 
 all: $(PROGRAM)
 

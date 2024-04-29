@@ -4,7 +4,6 @@
 // c   繰り返し計算のGCR法にあった誤り(L^tをかけていなかった)を正したversion
 // c	計算法の説明ファイルは「航跡波(数値計算法)6.doc」を見よ．#include <iostream>
 
-#include <GL/freeglut.h>
 
 #include <iostream>
 #include <fstream>
@@ -78,13 +77,6 @@ double c1,c2,alpha,ResT,ReCM, Amp,Lep,W1,W2,Wx1,Wx2,Upy,Yw1,Yw2;
 double dII,Xe,Ye;
 int K , L , KK , LL ;
 
-// 定数
-const int timer_period2 = 1;   //< タイマ周期 ミリ秒
-const double dt2 = 0.001;  //< 数値積分の時間刻み 秒
-
-// ウィンドウサイズ
-int window_width ;
-int window_height;
 
 // ファイル
 FILE* file = NULL;
@@ -93,25 +85,8 @@ FILE* file = NULL;
 
 
 
-// ウィンドウが閉じられたときに呼ばれるコールバック関数
-void close_func(){
-	// ファイルを閉じる
-	
-}
+int main(){
 
-
-int main(int argc, char** argv){
-
-    // OpenGLを初期化
-	glutInit(&argc, argv);
-
-    int windowWidth = 500;
-    int windowHeight = 500;
- 
-
-	// ウィンドウを作成
-    glutInitWindowSize(windowWidth, windowHeight);
-	glutCreateWindow("waveform");
 
     LL = 1;
 
@@ -119,9 +94,9 @@ int main(int argc, char** argv){
 
   double H = 0.09 ; //水深
 
-  c0 = 0.50;
-  rd = 5/H/1000;
-  filename = "F050 rd5.dat";
+  c0 = 0.60;
+  rd = 7/H/1000;
+  filename = "F060 rd7.dat";
 
   cout << filename << endl;
 
@@ -397,6 +372,8 @@ int main(int argc, char** argv){
 
 // Restore the original state
     cout.copyfmt(originalState);
+
+    ofstream waveofs("waveform " + filename);
 
 
 // C*************************************************************************
@@ -1442,37 +1419,8 @@ int main(int argc, char** argv){
         }
 
 
-	// 描画処理のお膳立て
-	glClear(GL_COLOR_BUFFER_BIT);
-	 glClearColor(1.0, 1.0, 1.0, 1.0);
+    for(int i = 0 ; i <= II ; ++i) waveofs << t << " " << X[i] << " " << YY[i] << endl;
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-1.5, 3, -3, 3, -1.0, 1.0);
-
-	// 座標軸を描画
-	glBegin(GL_LINES);
-	glColor3f(0.5f, 0.5f, 0.8f);
-	glVertex2d(0,  100);
-	glVertex2d(0,  -100);
-	glVertex2d(100,  0);
-	glVertex2d(-100,  0);
-	glEnd();
-    
-
-    for(int i= 0; i <= II ; ++i){
-        glBegin(GL_LINES);
-        glColor3f(0.0f, 0.0f, 0.0f);
-        glVertex2d(X[i]*0.09, YY[i] * 90);
-        glVertex2d(X[i+1]*0.09,  YY[i+1] * 90);
-        glEnd();
-    }
-
-	glFlush();
-	glutSwapBuffers();
 
 
 // c***********************************************************************
