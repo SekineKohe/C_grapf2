@@ -1,0 +1,28 @@
+1. mingw32が32bitか64bitか確認する方法
+
+コマンドプロンプトで
+mingw32-make --version
+と入力
+...
+Built for i686-pc-mingw32
+...
+と表示されたら32bit．
+
+...
+Built for x86_64-w64-mingw32
+...
+と表示されたら64bit．
+
+2. MakefileとDLLを選択
+2-1 32bitの場合
+Makefile.32bitをコピーしてMakefileを作成
+freeglut.dll.32bitをコピーしてfreeglut.dllを作成
+
+2-2 64bitの場合
+Makefile.64bitをコピーしてMakefileを作成
+freeglut.dll.64bitをコピーしてfreeglut.dllを作成
+
+
+
+
+

@@ -1,0 +1,17 @@
+CC      = gcc
+CFLAGS  = -Wall -g -c
+INCLUDE = -I../../include/mingw
+LDFLAGS = -L../../lib/mingw
+LIBS    = -lfreeglut -lopengl32
+SOURCES = main.cpp
+OBJS    = main.o
+PROGRAM = simulation
+
+all: $(PROGRAM)
+
+.cpp.o:
+			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(PROGRAM):	$(OBJS)
+			$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $(PROGRAM)
+
